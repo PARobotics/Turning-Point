@@ -17,7 +17,7 @@ void userControlProcedure(){
 }
 
 //Set up push release buttons
-#define USE_PR_BUTTON  1
+#define USE_PR_BUTTON  0
 #define NUM_PR_BUTTONS  0
 
 void setUpButtons(){ //Only include if using remote
@@ -25,12 +25,12 @@ void setUpButtons(){ //Only include if using remote
 }
 
 //Configure Sensors
-#define USE_SECOND_BATTERY 1
+#define USE_SECOND_BATTERY 0
 #define USE_LCD 1
 
 void lcdGenerateMessage(){
-  sprintf(lcdStr1, "8900 %4.1fV %4.1fV", getMainBatteryVoltage() / 1000.0, getSecondBatteryVoltage() / 1000.0);
-  sprintf(lcdStr2, "%4d", liftSensor.val);
+  //sprintf(lcdStr1, "8900 %4.1fV %4.1fV", getMainBatteryVoltage() / 1000.0, getSecondBatteryVoltage() / 1000.0);
+  //sprintf(lcdStr2, "%4d", liftSensor.val);
 }
 
 /*

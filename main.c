@@ -13,9 +13,9 @@
 
 #include "Vex_Competition_Includes.c"
 #include "main.h"
-#include "parallax-lib/bin/constants.h"
+#include "parallax-library/bin/constants.h"
 #include "auton.c"
-#include "parallax-lib/main.c"
+#include "parallax-library/main.c"
 #include "bat.c"
 
 void pre_auton(){
