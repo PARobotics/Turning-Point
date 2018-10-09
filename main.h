@@ -8,6 +8,9 @@
 */
 
 // ** Wrapper functions **
-
+//Intake
+void intakeUp();
+void intakeDown();
+void intakeStop();
 
 #endif
