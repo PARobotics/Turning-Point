@@ -20,5 +20,11 @@ void intakeStop(){
 	motor[M_INTAKE] = 0;
 }
 
+//Catapult
+void moveCatapult(int CMD){
+	motor[M_CATAPULT_1] = CMD * 127;
+	motor[M_CATAPULT_2] = CMD * 127;
+}
+
 
 #endif

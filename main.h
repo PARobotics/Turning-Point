@@ -7,6 +7,10 @@
   Jeffrey Shen
 */
 
+int FLIPPER_COMMAND = 0;
+#define HOLD_UP 10
+#define HOLD_DOWN 11
+
 // ** Wrapper functions **
 //Intake
 void intakeUp();

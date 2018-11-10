@@ -17,11 +17,12 @@ void userControlProcedure(){
 }
 
 //Set up push release buttons
-#define USE_PR_BUTTON  0
-#define NUM_PR_BUTTONS  0
+#define USE_PR_BUTTON  1
+#define NUM_PR_BUTTONS  1
+#define BTN_7L 0
 
 void setUpButtons(){ //Only include if using remote
-
+	addPrButton(BTN_7L, Btn7L);
 }
 
 //Configure Sensors
@@ -51,18 +52,17 @@ int MOTOR_SLEW[MOTOR_NUM] = {255, 255, 255, 255, 255, 255, 255, 255, 255, 255};
 #define DEBUG_MOVE 0
 #define DEBUG_REMOTE 0
 
-#define BAILOUT_BUTTON Btn8L
+#define BAILOUT_BUTTON Btn7R
 void bailOut(){
-
+	FLIPPER_COMMAND = STOP;
 }
 
 void move(int V, int H, int X){
   motorReq[M_WHEEL_L1] = BOUND(V + H, -127, 127);
   motorReq[M_WHEEL_L2] = BOUND(V + H, -127, 127);
-  motorReq[M_WHEEL_L3] = BOUND(V + H, -127, 127);
   motorReq[M_WHEEL_R1] = BOUND(V - H, -127, 127);
   motorReq[M_WHEEL_R2] = BOUND(V - H, -127, 127);
-  motorReq[M_WHEEL_R3] = BOUND(V - H, -127, 127);
+
 }
 
 #endif
