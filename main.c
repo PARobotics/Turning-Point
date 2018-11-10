@@ -91,7 +91,7 @@ task usercontrol(){
 		else moveCatapult(STOP);*/
 
 		if(getPrButton(BTN_7L)) {
-			PlaySoundFile("the-high-ground.wav");
+			PlaySoundFile("highground.wav");
 			resetPrButton(BTN_7L);
 		}
 
