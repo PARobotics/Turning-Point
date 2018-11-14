@@ -86,9 +86,9 @@ task usercontrol(){
 
 		else intakeStop();
 
-		/*if(vexRT[Btn5U]) moveCatapult(UP);
-		else if(vexRT[Btn5D]) moveCatapult(DOWN);
-		else moveCatapult(STOP);*/
+		if(vexRT[Btn8R]) moveCatapult(DOWN);
+		else if(vexRT[Btn8L]) moveCatapult(UP);
+		else moveCatapult(STOP);
 
 		if(getPrButton(BTN_7L)) {
 			PlaySoundFile("highground.wav");
