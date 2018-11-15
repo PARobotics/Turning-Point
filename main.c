@@ -53,6 +53,7 @@ task usercontrol(){
   int V, H, X;
 
   stopTask(autonomous);
+	startTask(catapultTask);
 
 	if(MODE == RBT_SKILL){ //Disable slew for the drive during robot skills
 		// MOTOR_SLEW[1] = 255;
@@ -85,9 +86,9 @@ task usercontrol(){
 		else if(vexRT[Btn8D]) intakeDown();
 		else intakeStop();
 
-		if(vexRT[Btn8R]) moveCatapult(DOWN);
-		else if(vexRT[Btn8L]) moveCatapult(UP);
-		else moveCatapult(STOP);
+		if(vexRT[Btn8R]) CATAPULT_COMMAND = DOWN;
+		else if(vexRT[Btn8L]) CATAPULT_COMMAND = UP;
+		else CATAPULT_COMMAND = STOP;
 
 		if(getPrButton(BTN_7L)) {
 			PlaySoundFile("highground.wav");

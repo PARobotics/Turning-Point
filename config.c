@@ -10,6 +10,7 @@
 //Configure preauton
 void preAutonProcedure(){
   //This code runs during preauton
+	startTask(catapultTask);
 }
 
 void userControlProcedure(){
@@ -55,6 +56,7 @@ int MOTOR_SLEW[MOTOR_NUM] = {255, 255, 40, 40, 40, 40, 255, 255, 255, 255};
 #define BAILOUT_BUTTON Btn7R
 void bailOut(){
 	FLIPPER_COMMAND = STOP;
+	CATAPULT_COMMAND = STOP;
 }
 
 void move(int V, int H, int X){
