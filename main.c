@@ -80,10 +80,9 @@ task usercontrol(){
 			intakeUp();
 			}
 		}
-		else */if(vexRT[Btn8U]) intakeUp();
-
+		else */
+		if(vexRT[Btn8U]) intakeUp();
 		else if(vexRT[Btn8D]) intakeDown();
-
 		else intakeStop();
 
 		if(vexRT[Btn8R]) moveCatapult(DOWN);

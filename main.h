@@ -17,4 +17,10 @@ void intakeUp();
 void intakeDown();
 void intakeStop();
 
+//Catapult
+bool catapultInPosition();
+void moveCatapult(int CMD);
+void lowerCatapultToIntake();
+void fireCatapult();
+
 #endif
