@@ -1,7 +1,9 @@
+#pragma config(Sensor, in8,    PWR,            sensorPotentiometer)
 #pragma config(Sensor, dgtl1,  S_WHEEL_L,      sensorQuadEncoder)
 #pragma config(Sensor, dgtl3,  S_WHEEL_R,      sensorQuadEncoder)
 #pragma config(Sensor, dgtl5,  S_TOP_SONAR,    sensorSONAR_cm)
 #pragma config(Sensor, dgtl7,  S_LOW_SONAR,    sensorSONAR_cm)
+#pragma config(Sensor, dgtl9,  S_CATAPULT_LIM, sensorTouch)
 #pragma config(Motor,  port1,           M_INTAKE,      tmotorVex393HighSpeed_HBridge, openLoop)
 #pragma config(Motor,  port2,           M_CATAPULT_1,  tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port3,           M_WHEEL_R2,    tmotorVex393HighSpeed_MC29, openLoop)
@@ -37,6 +39,7 @@
 
 void pre_auton(){
 	bStopTasksBetweenModes = false; //Make sure all tasks we create actually execute in user control
+	startTask(catapultTask, 9);
 	initialize();
 }
 
@@ -53,7 +56,7 @@ task usercontrol(){
   int V, H, X;
 
   stopTask(autonomous);
-	startTask(catapultTask);
+	startTask(catapultTask, 9);
 
 	if(MODE == RBT_SKILL){ //Disable slew for the drive during robot skills
 		// MOTOR_SLEW[1] = 255;
@@ -70,25 +73,14 @@ task usercontrol(){
   	X = vexRT[Ch4];
 		H = -vexRT[Ch1];
 
-		/*if(sensorValue(S_LOW_SONAR)<6) //edit later: needs overall update-LOW SONAR X USED
-		{
-			bool initiateLift = true;
-			while(initiateLift){
-				if(sensorValue(S_TOP_SONAR) <10 || vexRT[BAILOUT_BUTTON]){
-
-					break;
-				}
-			intakeUp();
-			}
-		}
-		else */
 		if(vexRT[Btn8U]) intakeUp();
 		else if(vexRT[Btn8D]) intakeDown();
 		else intakeStop();
 
-		if(vexRT[Btn8R]) CATAPULT_COMMAND = DOWN;
-		else if(vexRT[Btn8L]) CATAPULT_COMMAND = UP;
-		else CATAPULT_COMMAND = STOP;
+		if(vexRT[Btn8R] == 1) CATAPULT_COMMAND = SHOOT;
+		else if(vexRT[Btn8L] == 1) CATAPULT_COMMAND = RESET;
+		else if(vexRT[Btn7U] == 1) CATAPULT_COMMAND = UP;
+		else if(CATAPULT_COMMAND != HOLD && CATAPULT_COMMAND != RESET) CATAPULT_COMMAND = STOP;
 
 		if(getPrButton(BTN_7L)) {
 			PlaySoundFile("highground.wav");

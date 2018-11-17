@@ -10,7 +10,6 @@
 //Configure preauton
 void preAutonProcedure(){
   //This code runs during preauton
-	startTask(catapultTask);
 }
 
 void userControlProcedure(){
@@ -27,7 +26,7 @@ void setUpButtons(){ //Only include if using remote
 }
 
 //Configure Sensors
-#define USE_SECOND_BATTERY 0
+#define USE_SECOND_BATTERY 1
 #define USE_LCD 1
 
 void lcdGenerateMessage(){

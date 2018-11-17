@@ -8,8 +8,8 @@
 */
 
 void moveLift(int CMD){
-	motor[M_LIFT_1] = CMD * 127;
-	motor[M_LIFT_2] = CMD * 127;
+	motorReq[M_LIFT_1] = CMD * 127;
+	motorReq[M_LIFT_2] = CMD * 127;
 }
 
 void moveFlipper(int CMD){
@@ -18,7 +18,7 @@ void moveFlipper(int CMD){
 
 	if(CMD == UP || CMD == DOWN) CMD = CMD * 127;
 
-	motor[M_FLIPPER] = CMD;
+	motorReq[M_FLIPPER] = CMD;
 }
 
 

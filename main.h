@@ -27,4 +27,9 @@ void lowerCatapultToIntake();
 void fireCatapult();
 task catapultTask();
 
+//Lift
+void moveLift(int CMD);
+void moveFlipper(int CMD);
+
+
 #endif

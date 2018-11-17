@@ -7,21 +7,35 @@
   Jeffrey Shen
 */
 
-void autoA(){ //Fire it and move forward
-  autoB();
-  wait1Msec(1000);
-  moveFwd();
-  wait1Msec(3000);
-  moveStop();
-}
-
 void autoB(){ //Just fire it
   //Deploy Lift
+	moveLift(UP);
+	wait1Msec(300);
+	moveFlipper(UP);
+	moveLift(DOWN);
+	wait1Msec(300);
+	moveFlipper(STOP);
+	wait1Msec(200);
+	moveLift(STOP);
+	moveFlipper(DOWN);
+	wait1Msec(300);
+	moveFlipper(-20);
 
-  //Fire
-  lowerCatapultToIntake();
-  wait1Msec(1000);
+	CATAPULT_COMMAND = MANUAL;
+	lowerCatapultToIntake();
   fireCatapult();
+  CATAPULT_COMMAND = STOP;
+}
+
+void autoA(){ //Fire it and move forward
+	CATAPULT_COMMAND = MANUAL;
+	lowerCatapultToIntake();
+  fireCatapult();
+  CATAPULT_COMMAND = STOP;
+
+  moveFwd();
+  wait1Msec(2000);
+  moveStop();
 }
 
 void autoC(){
