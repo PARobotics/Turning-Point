@@ -30,14 +30,16 @@ void moveCatapult(int CMD){
 }
 
 void lowerCatapultToIntake(){ //Lower lift to ball loading
-	int t0 = time1[T1];
-	moveCatapult(DOWN);
-	while(!catapultInPosition() && !isTimedOut(t0 + 4000) && !isBailedOut()){
+	if(!catapultInPosition()){
+		int t0 = time1[T1];
 		moveCatapult(DOWN);
-		wait1Msec(10);
+		while(!catapultInPosition() && !isTimedOut(t0 + 4000) && !isBailedOut()){
+			moveCatapult(DOWN);
+			wait1Msec(10);
+		}
+		wait1Msec(200);
+		moveCatapult(STOP);
 	}
-	wait1Msec(200);
-	moveCatapult(STOP);
 }
 
 void fireCatapult(){
@@ -65,7 +67,6 @@ task catapultTask(){
 		}
 		else if(CATAPULT_COMMAND == RESET) {
 			lowerCatapultToIntake();
-			CATAPULT_COMMAND = HOLD;
 		}
 		else if(CATAPULT_COMMAND != MANUAL) moveCatapult(STOP);
 
