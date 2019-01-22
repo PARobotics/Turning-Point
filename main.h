@@ -9,6 +9,7 @@
 
 int FLIPPER_COMMAND = 0;
 int CATAPULT_COMMAND = 0;
+int LIFT_COMMAND = 0;
 #define HOLD_UP 10
 #define HOLD_DOWN 11
 #define SHOOT 12

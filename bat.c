@@ -22,18 +22,17 @@ void intakeStop(){
 
 //Catapult
 bool catapultInPosition(){ //Is the catapult in the proper position for loading and shooting
-	return SensorValue(S_TOP_SONAR) < 8;
+	return SensorValue(S_TOP_SONAR) != -1 && SensorValue(S_TOP_SONAR) <= 7;
 }
 
 void moveCatapult(int CMD){
-	motorReq[M_CATAPULT_1] = CMD * 127;
-	motorReq[M_CATAPULT_2] = CMD * 127;
+	motorReq[M_CATAPULT] = CMD * 127;
 }
 
 void lowerCatapultToIntake(){ //Lower lift to ball loading
 	int t0 = time1[T1];
 	moveCatapult(DOWN);
-	while(!catapultInPosition() && !isTimedOut(t0 + 2000) && !isBailedOut()){
+	while(!catapultInPosition() && !isTimedOut(t0 + 4000) && !isBailedOut()){
 		moveCatapult(DOWN);
 		wait1Msec(10);
 	}
@@ -44,7 +43,7 @@ void lowerCatapultToIntake(){ //Lower lift to ball loading
 void fireCatapult(){
 	int t0 = time1[T1];
 	moveCatapult(DOWN);
-	while(SensorValue(S_CATAPULT_LIM) == 0 && !isTimedOut(t0 + 3000) && !isBailedOut()){
+	while(catapultInPosition() && !isTimedOut(t0 + 1000) && !isBailedOut()){
 		moveCatapult(DOWN);
 		wait1Msec(10);
 	}
@@ -59,22 +58,14 @@ task catapultTask(){
 		else if(CATAPULT_COMMAND == DOWN){
 			moveCatapult(DOWN);
 		}
-		else if(CATAPULT_COMMAND == SHOOT) fireCatapult();
+		else if(CATAPULT_COMMAND == SHOOT) {
+			fireCatapult();
+			wait1Msec(500);
+			CATAPULT_COMMAND = RESET;
+		}
 		else if(CATAPULT_COMMAND == RESET) {
 			lowerCatapultToIntake();
 			CATAPULT_COMMAND = HOLD;
-		}
-		else if(CATAPULT_COMMAND == HOLD){
-			if(SensorValue(S_LOW_SONAR) <= 6){ //if there's a ball in
-				moveCatapult(DOWN);
-				wait1Msec(300);
-				moveCatapult(STOP);
-				wait1Msec(300);
-				moveCatapult(DOWN);
-				wait1Msec(700);
-				moveCatapult(STOP);
-				CATAPULT_COMMAND = STOP;
-			}
 		}
 		else if(CATAPULT_COMMAND != MANUAL) moveCatapult(STOP);
 
