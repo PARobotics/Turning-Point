@@ -88,7 +88,8 @@ task usercontrol(){
 		else if(CATAPULT_COMMAND != HOLD && CATAPULT_COMMAND != RESET) CATAPULT_COMMAND = STOP;*/
 
 		if(getPrButton(BTN_7L)) {
-			PlaySoundFile("highground.wav");
+			//PlaySoundFile("highground.wav");
+			//autoC();
 			resetPrButton(BTN_7L);
 		}
 
