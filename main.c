@@ -1,7 +1,7 @@
 #pragma config(Sensor, in8,    PWR,            sensorPotentiometer)
 #pragma config(Sensor, dgtl1,  S_WHEEL_L,      sensorQuadEncoder)
 #pragma config(Sensor, dgtl3,  S_WHEEL_R,      sensorQuadEncoder)
-#pragma config(Sensor, dgtl5,  S_TOP_SONAR,    sensorSONAR_cm)
+#pragma config(Sensor, dgtl5,  S_TOP_SONAR,    sensorSONAR_mm)
 #pragma config(Sensor, dgtl7,  S_LOW_SONAR,    sensorSONAR_cm)
 #pragma config(Sensor, dgtl9,  S_CATAPULT_LIM, sensorTouch)
 #pragma config(Motor,  port1,           M_INTAKE,      tmotorVex393HighSpeed_HBridge, openLoop)
@@ -78,10 +78,10 @@ task usercontrol(){
 		else if(vexRT[Btn8D]) intakeDown();
 		else intakeStop();
 
-		if(vexRT[Btn8R] == 1) CATAPULT_COMMAND = SHOOT;
-		else if(vexRT[Btn8L] == 1) CATAPULT_COMMAND = RESET;
-		else if(vexRT[Btn7U] == 1) CATAPULT_COMMAND = UP;
-		else if(CATAPULT_COMMAND != HOLD && CATAPULT_COMMAND != RESET) CATAPULT_COMMAND = STOP;
+		if(vexRT[Btn7U] == 1) CATAPULT_COMMAND = RESET;
+		else if(vexRT[Btn8L] == 1) CATAPULT_COMMAND = UP;
+		else if(vexRT[Btn8R] == 1) CATAPULT_COMMAND = DOWN;
+		else if(CATAPULT_COMMAND != RESET) CATAPULT_COMMAND = STOP;
 
 		/*if(vexRT[Btn8R] == 1) CATAPULT_COMMAND = UP;
 		else if(vexRT[Btn8L] == 1) CATAPULT_COMMAND = DOWN;

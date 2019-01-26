@@ -22,11 +22,12 @@ void intakeStop(){
 
 //Catapult
 bool catapultInPosition(){ //Is the catapult in the proper position for loading and shooting
-	return SensorValue(S_TOP_SONAR) != -1 && SensorValue(S_TOP_SONAR) <= 5;
+	return SensorValue(S_TOP_SONAR) != -1 && SensorValue(S_TOP_SONAR) <= 80;
 }
 
 void moveCatapult(int CMD){
-	motorReq[M_CATAPULT] = CMD * 127;
+	if(CMD == UP || CMD == DOWN) CMD = CMD * 127;
+	motorReq[M_CATAPULT] = CMD;
 }
 
 void lowerCatapultToIntake(){ //Lower lift to ball loading
@@ -58,6 +59,7 @@ task catapultTask(){
 		}
 		else if(CATAPULT_COMMAND == DOWN){
 			moveCatapult(DOWN);
+			///if(vexRT[Btn8R] == 0) CATAPULT_COMMAND = RESET;
 		}
 		else if(CATAPULT_COMMAND == SHOOT) {
 			fireCatapult();
